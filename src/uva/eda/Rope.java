@@ -1,5 +1,7 @@
 package uva.eda;
 
+import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Implements texts Strings as Ropes
@@ -18,7 +20,9 @@ public class Rope {
 	 * @param text
 	 */
 	public Rope(String text){
-		// depth = 0;
+		subString = text;
+		length = text.length();
+		depth = 0;
 	}
 	
 	/**
@@ -27,7 +31,13 @@ public class Rope {
 	 * @param right
 	 */
 	public Rope(Rope left, Rope right){
-		
+		this.left = left;
+		this.right = right;
+		length = left.length() + right.length();
+		if(left.depth() > right.depth())
+			depth = left.depth() + 1;
+		else
+			depth = right.depth() + 1;
 	}
 	
 	/**
@@ -70,6 +80,11 @@ public class Rope {
 		return depth;
 	}
 	
+	
+	public boolean isLeaf(){
+		return depth() == 0;
+	}
+	
 	/**
 	 * Concatenates two Ropes by putting the Rope given on the left of this Rope
 	 * @param left
@@ -94,10 +109,44 @@ public class Rope {
 	 * @return
 	 */
 	public char getChar(int position){
-		return 'a'; // CHANGE THIS
+		if(isLeaf())
+			return getSubString().charAt(position);
+		else{
+			if(position < getLeft().length())
+				return getLeft().getChar(position);
+			else{
+				position -= getLeft().length();
+				return getRight().getChar(position);
+			}
+		}
 	}
 	
 	
-	// BALANCE: public or private method
+	public Rope balance(){
+		Stack<Rope> myStack = new Stack<Rope>();
+		ArrayList<Rope> myList = new ArrayList<Rope>();
+		Rope tmp;
+		
+		myStack.push(this);
+		while(!myStack.empty()){
+			tmp = myStack.pop();
+			if(tmp.isLeaf())
+				myList.add(tmp);
+			else{
+				myStack.push(tmp.getRight());
+				myStack.push(tmp.getLeft());
+			}
+		}
+		
+		return getTree(myList);
+	}
+	
+	private Rope getTree(ArrayList<Rope> original){
+		if(original.size() == 1)
+			return original.get(0);
+		else{
+			return new Rope(getTree((ArrayList<Rope>) original.subList(0, original.size()/2)), getTree((ArrayList<Rope>) original.subList(original.size()/2, original.size())));
+		}
+	}
 	
 }
