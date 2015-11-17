@@ -1,5 +1,6 @@
 package uva.eda;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -121,10 +122,13 @@ public class Rope {
 		}
 	}
 	
-	
+	/**
+	 * Returns the Rope perfectly balanced
+	 * @return
+	 */
 	public Rope balance(){
 		Stack<Rope> myStack = new Stack<Rope>();
-		ArrayList<Rope> myList = new ArrayList<Rope>();
+		List<Rope> myList = new ArrayList<Rope>();
 		Rope tmp;
 		
 		myStack.push(this);
@@ -141,11 +145,11 @@ public class Rope {
 		return getTree(myList);
 	}
 	
-	private Rope getTree(ArrayList<Rope> original){
+	private Rope getTree(List<Rope> original){
 		if(original.size() == 1)
 			return original.get(0);
 		else{
-			return new Rope(getTree((ArrayList<Rope>) original.subList(0, original.size()/2)), getTree((ArrayList<Rope>) original.subList(original.size()/2, original.size())));
+			return new Rope(getTree(original.subList(0, original.size()/2)), getTree(original.subList(original.size()/2, original.size())));
 		}
 	}
 	
