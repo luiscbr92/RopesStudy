@@ -28,7 +28,7 @@ public class cvaca {
 		tpo1 = System.currentTimeMillis();
 		Rope rop = new Rope("");
 		for (int i = 1; i < 30000; i++) {
-			rop = rop.concatenateRight(new Rope(
+			rop = rop.concatenate(new Rope(
 					"Este es un ejemplo de lo que puede ser una cadena de texto, en este caso estamos hablando de la linea numero "
 							+ i));
 		}

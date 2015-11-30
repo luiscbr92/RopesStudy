@@ -14,9 +14,9 @@ public class test {
 		Rope leaf3 = new Rope("ar ");
 		Rope leaf4 = new Rope("de");
 		
-		Rope concat1 = leaf3.concatenateRight(leaf4);
-		Rope concat2 = leaf2.concatenateRight(concat1);
-		Rope rop = leaf1.concatenateRight(concat2);
+		Rope concat1 = leaf3.concatenate(leaf4);
+		Rope concat2 = leaf2.concatenate(concat1);
+		Rope rop = leaf1.concatenate(concat2);
 		
 		Rope balanced = rop.balance();
 		

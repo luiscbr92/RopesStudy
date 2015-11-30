@@ -87,20 +87,11 @@ public class Rope {
 	}
 	
 	/**
-	 * Concatenates two Ropes by putting the Rope given on the left of this Rope
-	 * @param left
-	 * @return
-	 */
-	public Rope concatenateLeft(Rope left){
-		return new Rope(left, this);
-	}
-	
-	/**
 	 * Concatenates two Ropes by putting the Rope given on the right of this Rope
 	 * @param right
 	 * @return
 	 */
-	public Rope concatenateRight(Rope right){
+	public Rope concatenate(Rope right){
 		return new Rope(this, right);
 	}
 	
