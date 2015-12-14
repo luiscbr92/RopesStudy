@@ -18,7 +18,6 @@ public class Rope {
 
 	/**
 	 * Initializes a new Rope with a String
-	 * @param text
 	 */
 	public Rope(String text){
 		subString = text;
@@ -28,8 +27,6 @@ public class Rope {
 	
 	/**
 	 * Initializes a new Rope joining two Ropes given
-	 * @param left
-	 * @param right
 	 */
 	public Rope(Rope left, Rope right){
 		this.left = left;
@@ -43,7 +40,6 @@ public class Rope {
 	
 	/**
 	 * USE WHEN DEPTH=0!! Returns the substring of this Rope
-	 * @return
 	 */
 	public String getSubString(){
 		return subString;
@@ -51,7 +47,6 @@ public class Rope {
 	
 	/**
 	 * USE WHEN DEPTH>0!! Returns the left Rope of this Rope
-	 * @return
 	 */
 	public Rope getLeft(){
 		return left;
@@ -59,7 +54,6 @@ public class Rope {
 
 	/**
 	 * USE WHEN DEPTH>0!! Returns the right Rope of this Rope
-	 * @return
 	 */
 	public Rope getRight(){
 		return right;
@@ -67,7 +61,6 @@ public class Rope {
 	
 	/**
 	 * Returns the length of this Rope
-	 * @return
 	 */
 	public int length(){
 		return length;
@@ -75,21 +68,20 @@ public class Rope {
 	
 	/**
 	 * Returns the depth of this Rope
-	 * @return
 	 */
 	public int depth(){
 		return depth;
 	}
 	
-	
+	/**
+	 * Checks if this rope has depth 0.
+	 */
 	public boolean isLeaf(){
 		return depth() == 0;
 	}
 	
 	/**
 	 * Concatenates two Ropes by putting the Rope given on the right of this Rope
-	 * @param right
-	 * @return
 	 */
 	public Rope concatenate(Rope right){
 		return new Rope(this, right);
@@ -97,8 +89,6 @@ public class Rope {
 	
 	/**
 	 * Returns the character allocated in the position given
-	 * @param position
-	 * @return
 	 */
 	public char getChar(int position){
 		if(isLeaf())
@@ -115,7 +105,6 @@ public class Rope {
 	
 	/**
 	 * Returns the Rope perfectly balanced
-	 * @return
 	 */
 	public Rope balance(){
 		Stack<Rope> myStack = new Stack<Rope>();
@@ -134,6 +123,16 @@ public class Rope {
 		}
 		
 		return getTree(myList);
+	}
+	
+	/**
+	 * Returns this rope as String
+	 */
+	public String toString(){
+		if(isLeaf())
+			return getSubString();
+		else
+			return getLeft().toString() + getRight().toString();
 	}
 	
 	private Rope getTree(List<Rope> original){
